@@ -12,6 +12,16 @@ A small CLI for spec-driven development, built around jj and stacked pull reques
 
 Work is planned in **tablets**. A tablet is one folder that holds the artifacts for one piece of work (`blueprint.md`, `tasks.md`).
 
+## Built for jj and stacked PRs
+
+- **One revision per slice.** `nabu-outline` splits a large feature into slices and creates one jj revision per slice. Each slice ships as one small, reviewable PR.
+- **Edit any slice, the stack follows.** jj rebases descendants automatically. Fix slice 2 while you work on slice 5 => slices 3 to 5 pick up the fix at once. No `git rebase -i`, no restacking scripts.
+- **One `stack.md` for the whole stack.** It lives in the stack revision at the bottom => every slice sees the same version. Edits made from any slice move down with one `jj squash`.
+- **Pin -> act -> diff.** Before a subagent or tool runs, the skill pins the current commit. After it returns, the agent runs `jj diff --from <pin>` and sees exactly what changed. No long report from the subagent, no grepping through the code to confirm it.
+- **Stacked PRs in one command.** `nabu-ship` opens one PR per slice, each based on the slice below. After an edit, rerun it: every restacked slice is pushed again.
+- **Undo for free.** Every jj operation is logged. A bad agent run is one `jj op restore` away => every step is a dry run you can keep or drop.
+- **No commit noise.** jj snapshots the working copy. Skills never commit as a side effect.
+
 ## Install
 
 ```sh
@@ -31,7 +41,7 @@ nabu init --local    # per project setup
 - **Stacks first.** A tablet can hold a `stack.md`. The stack splits the tablet into slices, one subfolder per slice. The `stack.md` template lives with the other templates (`blueprint.md`, `tasks.md`).
 - **Fully configurable.** Artifacts, templates, and rules come from config.
 - **Global settings and templates.** Set them once in `~/.config/nabu/`. A repo overrides only what differs.
-- **Self-learning.** `nabu-learn` mines past sessions for repeated corrections and friction. It turns them into architecture and reviewer rules, plus ranked process improvements. Every rule cites the sessions it came from.
+- **Self-learning.** `nabu-learn` mines past sessions for repeated corrections and friction. It turns them into learned rules and reviewer rules, plus ranked process improvements. Every rule cites the sessions it came from.
 - **Templates in one place.** Skills get the current template from `nabu instructions`. No skill holds a copy of the default template.
 
 ## Extras
