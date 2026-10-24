@@ -379,10 +379,7 @@ fn repo_template_overrides_the_stack_template_only_for_that_file() {
 fn new_slice_numbers_after_the_fixture_slices() {
     let sandbox = Sandbox::with_fixture("repo");
     let out = sandbox.nabu(&["new", "todo-reminders/snooze"]);
-    assert_eq!(
-        show(&out),
-        "exit 0\nnabu/tablets/todo-reminders/4-snooze\n"
-    );
+    assert_eq!(show(&out), "exit 0\nnabu/tablets/todo-reminders/4-snooze\n");
     assert!(
         sandbox
             .repo
@@ -409,10 +406,7 @@ fn new_slice_follows_the_highest_number_and_ignores_other_folders() {
     // A slice-shaped folder without the marker is not a slice.
     fs::create_dir(tablet.join("12-unmarked")).unwrap();
     let out = sandbox.nabu(&["new", "todo-reminders/snooze"]);
-    assert_eq!(
-        show(&out),
-        "exit 0\nnabu/tablets/todo-reminders/8-snooze\n"
-    );
+    assert_eq!(show(&out), "exit 0\nnabu/tablets/todo-reminders/8-snooze\n");
 }
 
 #[test]
@@ -422,10 +416,7 @@ fn new_slice_uses_the_tablets_schema_not_the_configured_one() {
     sandbox.write_global("config.toml", "schema = \"other\"\n");
     sandbox.write_other_schema();
     let out = sandbox.nabu(&["new", "todo-reminders/snooze"]);
-    assert_eq!(
-        show(&out),
-        "exit 0\nnabu/tablets/todo-reminders/4-snooze\n"
-    );
+    assert_eq!(show(&out), "exit 0\nnabu/tablets/todo-reminders/4-snooze\n");
 }
 
 #[test]
