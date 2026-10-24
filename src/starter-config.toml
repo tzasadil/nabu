@@ -1,0 +1,3 @@
+# schema = "specless"  # Schema new tablets use. Built in, so unset is fine.
+# context = "..."      # Text added to every prompt.
+# [rules]              # Rules added to the prompt of one artifact, e.g. blueprint = ["..."]

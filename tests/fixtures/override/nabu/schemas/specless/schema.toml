@@ -1,0 +1,60 @@
+name = "specless"
+description = "workflow focused on long term information keeping; blueprint → tasks"
+
+[[artifacts]]
+id = "blueprint"
+generates = "blueprint.md"
+description = """
+High level implementation-facing structure and integration map for the change — build/structure, technical details, and lasting decisions. Omit exact implementation details (eg. code snippets, exact constants, etc). Enough technical details to implement without prescribing the code.
+"""
+template = "blueprint.md"
+requires = []
+
+[[artifacts]]
+id = "backlog"
+generates = "backlog.md"
+description = "Non-normative deferred findings (optional; not part of SHALL contract)"
+template = "backlog.md"
+instruction = """
+Maintain a **non-normative** backlog for this change. Content is **not** part of a normative contract: no SHALL/MUST here.
+
+Use when: sweeps, reviews, or implementation efforts discover gaps that should be recorded but must **not** widen this change’s scope.
+
+Structure: short sections or bullets with **What**, **Where** (paths), **Why deferred**, **Possible resolutions** (if any), **When to revisit** (if any).
+
+All deferred items live here in the local `backlog.md`.
+"""
+requires = ["blueprint"]
+
+[[artifacts]]
+id = "tasks"
+generates = "tasks.md"
+description = "Compact checklist with completion gates and artifact sync"
+template = "tasks.md"
+instruction = """
+Section 'completion gate' is mandatory to be included after implementation and with the wording in the template (but additional todo items can be to it).
+
+Implementation/verification types of tasks must sit before 'completion gates', but don't need to follow the template structure exactly. E.g., one can split it into multiple tasks sections if suitable. Extend with concrete work items instead of what's in the template.
+
+- impl along with verification (tests, linting, build, etc.). -> completion gate that checks the work and enforces the blueprint and good coding. Must be run automatically after impl. -> artifacts update ('post work cleanup ensuring change is ready for archive') to update the blueprint and backlog with new insights from implementation. Must be run only after everything else is done.
+
+Additional sections may be added at will, but they must abide by the intentions above.
+
+Use `- [ ]` checkboxes throughout the file;
+
+Any <!-- comment --> in the template file shouldn't be copy-pasted into the file (applies to all of the templates).
+"""
+requires = ["blueprint"]
+
+[build]
+requires = ["tasks"]
+tracks = "tasks.md"
+instruction = """
+Read context files, work through pending tasks, mark complete when the respective task is done but not before.
+
+New ambiguities or blockers should be paused and resolved before continuing. Ask the user for clarification if unsure and needing a decision.
+
+TODO sections MUST be executed in order - only move to the next section when the current section is fully complete and marked as such.
+
+include 'skip_specs: true' in .openspec.yaml otherwise openspec complains about lack of delta specs.
+"""

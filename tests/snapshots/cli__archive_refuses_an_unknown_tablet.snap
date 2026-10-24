@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"archive\", \"nope\"])"
+---
+exit 1
+error: unknown tablet "nope"; existing tablets: 42-empty-list-notice, todo-reminders
+fix: nabu new nope

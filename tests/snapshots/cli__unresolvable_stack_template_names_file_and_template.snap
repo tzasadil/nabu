@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"new\", \"demo\"])"
+---
+exit 1
+error: nabu/schemas/specless/schema.toml: stack template "missing.md" is in no layer
+fix: add schemas/specless/templates/missing.md to a layer, or remove `stack` from nabu/schemas/specless/schema.toml

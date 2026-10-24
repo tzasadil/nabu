@@ -1,0 +1,10 @@
+---
+source: tests/cli.rs
+expression: show(&out)
+---
+exit 2
+error: the argument '--global' cannot be used with '--local'
+
+Usage: nabu init --global
+
+For more information, try '--help'.

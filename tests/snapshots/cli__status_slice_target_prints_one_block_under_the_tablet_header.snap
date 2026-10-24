@@ -1,0 +1,12 @@
+---
+source: tests/cli.rs
+expression: "show(&sandbox.nabu(&[\"status\", \"todo-reminders/2\"]))"
+---
+exit 0
+todo-reminders  stacked  specless  86/86 tasks  ready to archive
+stack.md  done
+
+2-reminder-delivery  28/28 tasks  ready to archive
+  blueprint  done
+  backlog    done
+  tasks      done

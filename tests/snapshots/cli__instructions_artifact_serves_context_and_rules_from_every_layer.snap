@@ -1,0 +1,53 @@
+---
+source: tests/cli.rs
+expression: "show(&sandbox.nabu(&[\"instructions\", \"blueprint\", \"42-empty-list-notice\"]))"
+---
+exit 0
+artifact: blueprint
+target: 42-empty-list-notice
+write: nabu/tablets/42-empty-list-notice/blueprint.md
+state: done
+requires: none
+read: none
+
+<description>
+Implementation-facing structure and integration map for the tablet — build/structure, technical details, and lasting decisions. Omit exact implementation details (eg. code snippets). Enough technical details to implement without prescribing the code.
+</description>
+
+<context>
+global context
+
+repo context
+</context>
+
+<rules>
+- global rule
+- repo rule
+</rules>
+
+<template>
+# Blueprint [tablet name]
+
+## Feature description
+
+<!-- Describe what will change.  -->
+
+## Agent Decisions
+<!-- important choices made by the agent and why they were chosen. -->
+
+## User Decisions
+<!-- important choices made by the user and why they were chosen. -->
+
+## Flow
+<!-- Optional. Use only when data, state, or control flow changed in a meaningful way. Fancy diagrams for humans. -->
+- [Step 1] -> [Step 2] -> [Step 3]
+
+## Contracts
+<!-- Must-hold outcomes for verification. -->
+
+## Out of scope
+<!-- Where this feature stops -->
+
+## Gotchas
+<!-- Optional. Non-obvious traps, risks, tradeoffs, fragile areas, or surprising exceptions future agents must not miss -->
+</template>

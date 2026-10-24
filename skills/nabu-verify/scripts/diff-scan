@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Doc-facing entry point. Child shell on purpose: lib.sh runs set -euo pipefail,
+# sourcing it into caller shell leaks those settings.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./lib.sh
+source "$SCRIPT_DIR/lib.sh"
+
+case "${1:-}" in
+  full)
+    shift
+    list_full_diff "$@"
+    ;;
+  lines)
+    shift
+    list_added_lines "$@"
+    ;;
+  *)
+    cat >&2 <<'EOF'
+usage: diff-scan {full|lines} [--include-tests|--exclude-tests]
+  full   git-format diff of non-test, non-lockfile paths (nabu paths stay)
+  lines  compact added-line index (tests off by default)
+env: REF=<merge target> diff from its fork point with the working copy; INCLUDE_TESTS=1 tests on
+EOF
+    exit 2
+    ;;
+esac

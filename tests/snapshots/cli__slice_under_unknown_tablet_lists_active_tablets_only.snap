@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"new\", \"split-sync-worker/first\"])"
+---
+exit 1
+error: unknown tablet "split-sync-worker"; existing tablets: 42-empty-list-notice, todo-reminders
+fix: nabu new split-sync-worker

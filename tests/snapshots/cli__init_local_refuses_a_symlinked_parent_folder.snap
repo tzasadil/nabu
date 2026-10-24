@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_init_refused(&sandbox, &[\"init\", \"--local\"])"
+---
+exit 1
+error: .claude is a symlink, and init would write through it
+fix: replace .claude with a real folder, or run nabu init elsewhere

@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"instructions\", \"build\", FIRST_SLICE])"
+---
+exit 1
+error: [TMP]/xdg/nabu/config.toml, nabu/config.toml sets [rules] "build", which is no artifact of schema "specless" (defaults/schemas/specless/schema.toml); artifacts: blueprint, backlog, tasks
+fix: rename "build" to an artifact id, or remove it, in [TMP]/xdg/nabu/config.toml, nabu/config.toml

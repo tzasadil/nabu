@@ -1,0 +1,61 @@
+name = "specless"
+description = "workflow focused on long term information keeping; blueprint → tasks"
+stack = "stack.md"
+
+[[artifacts]]
+id = "blueprint"
+generates = "blueprint.md"
+description = """
+Implementation-facing structure and integration map for the tablet — build/structure, technical details, and lasting decisions. Omit exact implementation details (eg. code snippets). Enough technical details to implement without prescribing the code.
+"""
+template = "blueprint.md"
+requires = []
+
+[[artifacts]]
+id = "backlog"
+generates = "backlog.md"
+description = "Non-normative deferred findings (optional; not part of SHALL contract)"
+template = "backlog.md"
+instruction = """
+Maintain a **non-normative** backlog for this tablet. Content is **not** part of a normative contract: no SHALL/MUST here.
+
+Use when: sweeps, reviews, or implementation efforts discover gaps that should be recorded but must **not** widen this tablet’s scope.
+
+Structure: short sections or bullets with **What**, **Where** (paths), **Why deferred**, **Possible resolutions** (if any), **When to revisit** (if any).
+
+All deferred items live **here in the local `backlog.md`**.
+"""
+requires = ["blueprint"]
+
+[[artifacts]]
+id = "tasks"
+generates = "tasks.md"
+description = "Compact checklist with completion gates and artifact sync"
+template = "tasks.md"
+instruction = """
+Section 'completion gate' is mandatory to be included after implementation and with the wording in the template (but additional todo items can be to it).
+
+Implementation/verification types of tasks must sit before 'completion gates', but don't need to follow the template structure exactly. E.g., one can split it into multiple tasks sections if suitable. Extend with concrete work items instead of what's in the template.
+
+- impl along with verification (tests, linting, build, etc.). -> completion gate that checks the work and enforces the blueprint and good coding. Must be run automatically after impl. -> artifacts update ('post work cleanup ensuring tablet is ready for archive') to update the blueprint and backlog with new insights from implementation. Must be run only after everything else is done.
+
+Additional sections may be added at will, but they must abide by the intentions above.
+
+Use `- [ ]` checkboxes throughout the file;
+
+Any <!-- comment --> in the template file shouldn't be copy-pasted into the file.
+"""
+requires = ["blueprint"]
+
+[build]
+requires = ["tasks"]
+tracks = "tasks.md"
+instruction = """
+Read context files, work through pending tasks, mark complete when the respective task is done but not before.
+
+Pause if you hit blockers or need clarification. Ask the user.
+
+TODO sections MUST be executed in order. Only move to the next section when the current section is fully complete and marked as such.
+
+Optional `backlog.md` is **not** tracked by checkbox progress here; do not use `- [ ]` in optional backlog sections of `tasks.md` if you want build progress to stay aligned with sections 1–4 only.
+"""

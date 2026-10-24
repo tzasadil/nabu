@@ -1,0 +1,28 @@
+---
+source: tests/cli.rs
+expression: report
+---
+$ nabu status 42-empty-list-notice/1
+exit 1
+error: tablet "42-empty-list-notice" is not stacked: nabu/tablets/42-empty-list-notice/stack.md is missing
+fix: add nabu/tablets/42-empty-list-notice/stack.md
+
+$ nabu status a/b/c
+exit 1
+error: invalid target "a/b/c": expected <tablet> or <tablet>/<slice>
+fix: nabu status <tablet>/<slice>
+
+$ nabu status todo-reminders/9
+exit 1
+error: unknown slice "9" in tablet "todo-reminders"; existing slices: 1-reminder-schedule, 2-reminder-delivery, 3-reminder-api
+fix: use todo-reminders/<N>, todo-reminders/<slice> or todo-reminders/<N>-<slice>
+
+$ nabu status nope
+exit 1
+error: unknown tablet "nope"; existing tablets: 42-empty-list-notice, todo-reminders
+fix: nabu new nope
+
+$ nabu status ..
+exit 1
+error: unknown tablet ".."; existing tablets: 42-empty-list-notice, todo-reminders
+fix: nabu new ..

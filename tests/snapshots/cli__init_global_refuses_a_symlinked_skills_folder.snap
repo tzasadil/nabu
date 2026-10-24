@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_init_refused(&sandbox, &[\"init\"])"
+---
+exit 1
+error: [TMP]/home/.agents/skills is a symlink, and init would write through it
+fix: replace [TMP]/home/.agents/skills with a real folder, or run nabu init elsewhere

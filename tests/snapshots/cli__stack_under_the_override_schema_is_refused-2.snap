@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"new\", \"demo/first\"])"
+---
+exit 1
+error: tablet "demo" is not stacked: nabu/schemas/specless/schema.toml has no `stack` key
+fix: add stack = "stack.md" to nabu/schemas/specless/schema.toml

@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"archive\", &target])"
+---
+exit 1
+error: cannot archive "todo-reminders/1": archive moves whole tablets
+fix: nabu archive todo-reminders

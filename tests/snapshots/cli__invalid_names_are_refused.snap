@@ -1,0 +1,33 @@
+---
+source: tests/cli.rs
+expression: report
+---
+$ nabu new Bad_Name
+exit 1
+error: invalid tablet name "Bad_Name": use lowercase letters, digits and hyphens, and start with a letter or digit
+fix: use a name like "bad-name"
+
+$ nabu new a_b
+exit 1
+error: invalid tablet name "a_b": use lowercase letters, digits and hyphens, and start with a letter or digit
+fix: use a name like "a-b"
+
+$ nabu new demo/1st
+exit 1
+error: invalid slice name "1st": use lowercase letters, digits and hyphens, and start with a letter
+fix: use a name like "my-name"
+
+$ nabu new demo/Up
+exit 1
+error: invalid slice name "Up": use lowercase letters, digits and hyphens, and start with a letter
+fix: use a name like "up"
+
+$ nabu new a/b/c
+exit 1
+error: invalid target "a/b/c": expected <tablet> or <tablet>/<slice>
+fix: nabu new <tablet>/<slice>
+
+$ nabu new demo/
+exit 1
+error: invalid slice name "": use lowercase letters, digits and hyphens, and start with a letter
+fix: use a name like "my-name"

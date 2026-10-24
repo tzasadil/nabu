@@ -1,0 +1,9 @@
+---
+source: tests/cli.rs
+expression: sandbox.tree()
+---
+nabu/
+nabu/tablets/
+nabu/tablets/demo/
+nabu/tablets/demo/.nabu.toml
+schema = "specless"

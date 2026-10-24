@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"instructions\", \"tasks\", STACKED])"
+---
+exit 1
+error: tablet "todo-reminders" is stacked: its artifacts live in slices; slices: 1-reminder-schedule, 2-reminder-delivery, 3-reminder-api
+fix: nabu instructions tasks todo-reminders/1

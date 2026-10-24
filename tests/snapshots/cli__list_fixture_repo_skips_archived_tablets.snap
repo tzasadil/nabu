@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "show(&sandbox.nabu(&[\"list\"]))"
+---
+exit 0
+42-empty-list-notice  7/7 tasks              ready to archive
+todo-reminders        86/86 tasks  3 slices  ready to archive

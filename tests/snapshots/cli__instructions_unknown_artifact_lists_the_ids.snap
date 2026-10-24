@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"instructions\", \"spec\", \"42-empty-list-notice\"])"
+---
+exit 1
+error: unknown artifact "spec"; artifacts: blueprint, backlog, tasks, or the words build, stack
+fix: nabu instructions blueprint 42-empty-list-notice

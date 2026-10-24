@@ -1,0 +1,11 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"new\", \"demo\"])"
+---
+exit 1
+error: [TMP]/xdg/nabu/config.toml: TOML parse error at line 1, column 1
+  |
+1 | shema = "specless"
+  | ^^^^^
+unknown field `shema`, expected one of `schema`, `context`, `rules`
+fix: fix the TOML in [TMP]/xdg/nabu/config.toml

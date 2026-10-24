@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"status\", \"42-empty-list-notice\"])"
+---
+exit 1
+error: nabu/schemas/specless/schema.toml: dependency cycle: blueprint -> tasks -> blueprint
+fix: remove one `requires` entry on the cycle in nabu/schemas/specless/schema.toml

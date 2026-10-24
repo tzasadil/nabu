@@ -1,0 +1,9 @@
+---
+source: tests/cli.rs
+expression: show_report(&out)
+---
+exit 1
+42-empty-list-notice  7/7 tasks              ready to archive
+bad-graph             error  nabu/schemas/cyclic/schema.toml: dependency cycle: blueprint -> tasks -> blueprint
+bad-toml              error  nabu/tablets/bad-toml/.nabu.toml: TOML parse error at line 1, column 10
+todo-reminders        86/86 tasks  3 slices  ready to archive

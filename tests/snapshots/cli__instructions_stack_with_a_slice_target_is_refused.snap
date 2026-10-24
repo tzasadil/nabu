@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"instructions\", \"stack\", FIRST_SLICE])"
+---
+exit 1
+error: "todo-reminders/1-reminder-schedule" is a slice: the stack file belongs to the tablet
+fix: nabu instructions stack todo-reminders

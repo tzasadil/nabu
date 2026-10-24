@@ -1,0 +1,17 @@
+---
+source: tests/cli.rs
+expression: report
+---
+$ nabu status demo
+exit 0
+demo  stacked  specless  1/1 tasks  ready to archive
+stack.md  ready
+
+1-first  1/1 tasks  ready to archive
+  blueprint  done
+  backlog    ready
+  tasks      done
+
+$ nabu list
+exit 0
+demo  1/1 tasks  1 slices  ready to archive

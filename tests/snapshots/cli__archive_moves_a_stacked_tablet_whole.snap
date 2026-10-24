@@ -1,0 +1,6 @@
+---
+source: tests/cli.rs
+expression: "mask_dates(&show(&out), &dates)"
+---
+exit 0
+nabu/archive/[DATE]-todo-reminders

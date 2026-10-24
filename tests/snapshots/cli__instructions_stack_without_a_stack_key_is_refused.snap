@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"instructions\", \"stack\", \"plain-other\"])"
+---
+exit 1
+error: [TMP]/xdg/nabu/schemas/other/schema.toml: schema has no `stack` key, so it has no stack template
+fix: add stack = "stack.md" to [TMP]/xdg/nabu/schemas/other/schema.toml

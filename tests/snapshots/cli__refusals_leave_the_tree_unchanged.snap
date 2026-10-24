@@ -1,0 +1,28 @@
+---
+source: tests/cli.rs
+expression: report
+---
+$ nabu new 42-empty-list-notice
+exit 1
+error: tablet "42-empty-list-notice" already exists at nabu/tablets/42-empty-list-notice
+fix: pick another name, or work in the existing tablet
+
+$ nabu new todo-reminders/reminder-delivery
+exit 1
+error: slice "reminder-delivery" already exists in tablet "todo-reminders" as 2-reminder-delivery
+fix: pick another slice name
+
+$ nabu new nope/first
+exit 1
+error: unknown tablet "nope"; existing tablets: 42-empty-list-notice, todo-reminders
+fix: nabu new nope
+
+$ nabu new 42-empty-list-notice/first
+exit 1
+error: tablet "42-empty-list-notice" is not stacked: nabu/tablets/42-empty-list-notice/stack.md is missing
+fix: add nabu/tablets/42-empty-list-notice/stack.md
+
+$ nabu new todo-reminders/first --stack
+exit 1
+error: --stack applies to a tablet, not to a slice
+fix: nabu new todo-reminders/first

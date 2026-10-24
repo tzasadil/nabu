@@ -1,0 +1,6 @@
+---
+source: tests/cli.rs
+expression: "show(&sandbox.nabu(&[\"list\"]))"
+---
+exit 0
+no active tablets

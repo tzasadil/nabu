@@ -1,0 +1,11 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"new\", \"demo\"])"
+---
+exit 1
+error: nabu/config.toml: TOML parse error at line 1, column 10
+  |
+1 | schema = 
+  |          ^
+string values must be quoted, expected literal string
+fix: fix the TOML in nabu/config.toml

@@ -1,0 +1,11 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"new\", \"demo\"])"
+---
+exit 1
+error: nabu/schemas/specless/schema.toml: TOML parse error at line 1, column 1
+  |
+1 | name = "specless"
+  | ^
+missing field `build`
+fix: fix the TOML in nabu/schemas/specless/schema.toml

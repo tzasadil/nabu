@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "mask_dates(&report, &dates)"
+---
+exit 1
+error: nabu/archive/[DATE]-42-empty-list-notice already exists
+fix: rename or remove nabu/archive/[DATE]-42-empty-list-notice, then rerun

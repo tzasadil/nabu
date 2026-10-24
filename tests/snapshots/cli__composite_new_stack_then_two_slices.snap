@@ -1,0 +1,15 @@
+---
+source: tests/cli.rs
+expression: report
+---
+$ nabu new demo --stack
+exit 0
+nabu/tablets/demo
+
+$ nabu new demo/first
+exit 0
+nabu/tablets/demo/1-first
+
+$ nabu new demo/second
+exit 0
+nabu/tablets/demo/2-second

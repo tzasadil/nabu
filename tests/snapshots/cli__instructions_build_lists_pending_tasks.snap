@@ -1,0 +1,27 @@
+---
+source: tests/cli.rs
+expression: "show(&sandbox.nabu(&[\"instructions\", \"build\", FIRST_SLICE]))"
+---
+exit 0
+build: todo-reminders/1-reminder-schedule
+state: ready
+progress: 1/4 tasks
+requires: tasks (done)
+tracks: nabu/tablets/todo-reminders/1-reminder-schedule/tasks.md
+read: nabu/tablets/todo-reminders/1-reminder-schedule/blueprint.md, nabu/tablets/todo-reminders/1-reminder-schedule/tasks.md, nabu/tablets/todo-reminders/stack.md
+
+<instruction>
+Read context files, work through pending tasks, mark complete when the respective task is done but not before.
+
+Pause if you hit blockers or need clarification. Ask the user.
+
+TODO sections MUST be executed in order. Only move to the next section when the current section is fully complete and marked as such.
+
+Optional `backlog.md` is **not** tracked by checkbox progress here; do not use `- [ ]` in optional backlog sections of `tasks.md` if you want build progress to stay aligned with sections 1–4 only.
+</instruction>
+
+<pending>
+- [ ] 1.2 Open
+  - [ ] 1.3 Nested open
+- [ ] 2.1 Verify
+</pending>

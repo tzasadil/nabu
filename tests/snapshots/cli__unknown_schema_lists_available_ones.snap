@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_refused(&sandbox, &[\"new\", \"demo\"])"
+---
+exit 1
+error: unknown schema "nope"; found: specless
+fix: set schema = "<name>" in nabu/config.toml to one of the found schemas

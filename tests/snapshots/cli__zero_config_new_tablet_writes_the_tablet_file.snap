@@ -1,0 +1,6 @@
+---
+source: tests/cli.rs
+expression: show(&out)
+---
+exit 0
+nabu/tablets/demo

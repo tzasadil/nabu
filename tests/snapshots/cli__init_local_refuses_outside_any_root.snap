@@ -1,0 +1,7 @@
+---
+source: tests/cli.rs
+expression: "assert_init_refused(&sandbox, &[\"init\", \"--local\"])"
+---
+exit 1
+error: no nabu root found from [TMP]/repo
+fix: run inside a jj repo or create nabu/config.toml

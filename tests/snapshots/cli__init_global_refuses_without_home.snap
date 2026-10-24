@@ -1,0 +1,6 @@
+---
+source: tests/cli.rs
+expression: stderr
+---
+error: HOME is not set
+fix: set HOME to your home folder and rerun nabu init

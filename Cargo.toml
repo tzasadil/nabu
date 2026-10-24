@@ -1,0 +1,16 @@
+[package]
+name = "nabu"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/tzasadil/nabu"
+
+[dependencies]
+clap = { version = "4.6.7", features = ["derive"] }
+jiff = "0.2.38"
+serde = { version = "1.0.229", features = ["derive"] }
+toml = "1.1.8"
+
+[dev-dependencies]
+insta = "1.49.0"
+tempfile = "3.27.0"

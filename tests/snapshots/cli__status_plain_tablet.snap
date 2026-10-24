@@ -1,0 +1,9 @@
+---
+source: tests/cli.rs
+expression: "show(&sandbox.nabu(&[\"status\", \"42-empty-list-notice\"]))"
+---
+exit 0
+42-empty-list-notice  specless  7/7 tasks  ready to archive
+blueprint  done
+backlog    done
+tasks      done
