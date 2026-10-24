@@ -8,20 +8,16 @@
 
 ---
 
-A small CLI for spec-driven development, built around jj and stacks. Heavily inspired by [OpenSpec](https://github.com/Fission-AI/OpenSpec).
+A small CLI for spec-driven development, built around jj and stacked pull requests. Heavily inspired by [OpenSpec](https://github.com/Fission-AI/OpenSpec).
 
-Work is planned in **tablets**. A tablet is one folder that holds the artifacts for one piece of work (`blueprint.md`, `tasks.md`). The name avoids a clash with jj, where a "change" is a revision.
-
-Tablets live in `nabu/tablets/<name>/`. Archived tablets move to `nabu/archive/YYYY-MM-DD-<name>/`.
+Work is planned in **tablets**. A tablet is one folder that holds the artifacts for one piece of work (`blueprint.md`, `tasks.md`).
 
 ## Install
 
-The binary embeds `skills/` and `agents/`, so the installed copies always match the CLI. crates.io has another `nabu` => install from git or a checkout.
-
 ```sh
-cargo install --git https://github.com/tzasadil/nabu   # or: cargo install --path .
+cargo install --git https://github.com/tzasadil/nabu
 nabu init            # same as --global
-nabu init --local    # inside a jj repo
+nabu init --local    # per project setup
 ```
 
 - `nabu init` installs into your home: skills in `~/.agents/skills/`, agents in `~/.claude/agents/`, and a link `~/.claude/skills` when missing. It writes a starter `~/.config/nabu/config.toml` when missing.
