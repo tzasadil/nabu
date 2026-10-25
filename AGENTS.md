@@ -19,3 +19,4 @@
 ## Tests
 
 - Snapshot tests built from real `openspec/` folder shapes. Fixture text is invented: no private project content in the public repo.
+- Checks: `hk check --all` (steps in `hk.pkl`), then `cargo test`. CI runs both. hk reads the git index => run it in a colocated workspace.

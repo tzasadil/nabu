@@ -1,0 +1,21 @@
+// One check list for local runs (`hk check --all`, `hk fix --all`) and CI (.github/workflows/check.yml).
+// jj never runs git hooks, so hk's pre-commit hook would never fire here: run hk by hand.
+// hk needs a git repo (it lists files from the git index): run it in a colocated workspace.
+// Tools are not installed by hk. Versions: the install step in .github/workflows/check.yml.
+amends "package://github.com/jdx/hk/releases/download/v2.8.1/hk@2.8.1#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.8.1/hk@2.8.1#/Builtins.pkl"
+
+steps {
+  ["cargo-fmt"] = Builtins.cargo_fmt
+  // The builtin passes on warnings and skips test code.
+  ["cargo-clippy"] = (Builtins.cargo_clippy) {
+    check {
+      command = "cargo clippy --manifest-path {{workspace_indicator}} --all-targets --quiet -- -D warnings"
+    }
+  }
+  // Config: deny.toml.
+  ["cargo-deny"] = Builtins.cargo_deny
+  ["taplo"] = Builtins.taplo
+  // Config: _typos.toml.
+  ["typos"] = Builtins.typos
+}

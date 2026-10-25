@@ -1,0 +1,5 @@
+[default.extend-words]
+# Tests misspell a config key on purpose: the error must name the unknown key.
+shema = "shema"
+# A valid spelling.
+unparseable = "unparseable"

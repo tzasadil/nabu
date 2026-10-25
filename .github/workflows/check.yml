@@ -1,0 +1,54 @@
+name: Check
+
+# Static checks live in hk.pkl. Same commands locally: `hk check --all`, then `cargo test`.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    # The default types miss ready_for_review, so marking a draft ready would run nothing until
+    # the next push.
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check:
+    name: Check (hk, test)
+    # Drafts skip the run. On push there is no pull_request, so the condition is true.
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Not pinned: the latest stable, like a local `rustup update`. The cost: a new clippy lint can
+      # fail an unchanged tree.
+      - name: Update Rust
+        run: rustup update stable --no-self-update && rustup component add clippy rustfmt
+
+      # Versions match the local tools. hk and jj are not in the action's manifest, so they come
+      # through its cargo-binstall fallback (prebuilt release binaries). Without jj the stack_pr
+      # tests skip themselves and pass.
+      - name: Install hk, linters, and jj
+        uses: taiki-e/install-action@1e29709c0ec63babbe8f266397a465f29a825f91 # v2.87.31
+        with:
+          tool: hk@2.8.1,cargo-deny@0.20.2,typos@1.51.1,taplo@0.10.0,jj-cli@0.46.0
+
+      - name: Run checks
+        run: hk check --all
+
+      - name: Run tests
+        run: cargo test --locked

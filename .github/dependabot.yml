@@ -1,0 +1,29 @@
+# Monthly dependency update PRs. The 7 day cooldown skips releases too fresh to trust.
+# Security updates are separate: turn on Dependabot alerts and security updates in the repo settings.
+#
+# Not seen by Dependabot, bump by hand: the tool versions in .github/workflows/check.yml and the hk
+# package version in hk.pkl.
+version: 2
+
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    groups:
+      minor-and-patch:
+        update-types: ['minor', 'patch']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        update-types: ['minor', 'patch']

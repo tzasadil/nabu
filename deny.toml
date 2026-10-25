@@ -1,0 +1,12 @@
+# cargo-deny config. hk.pkl runs `cargo-deny check`: advisories, bans, licenses, sources.
+# A new advisory fails CI on an unchanged tree. That is the alert: one user, few dependencies.
+
+[licenses]
+allow = ["Apache-2.0", "MIT", "Unicode-3.0", "Unlicense"]
+
+[bans]
+multiple-versions = "warn"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
